@@ -8,5 +8,8 @@ template_mapper.template_mapper.*:
     label:
       type: label
       label: 'Label'
+    mappings:
+      type: string
+      label: 'mappings'
     uuid:
       type: string

@@ -42,6 +42,12 @@ class TemplateMapperForm extends EntityForm {
       '#disabled' => !$template_mapper->isNew(),
     );
 
+
+    $form['mappings'] = array(
+      '#type' => 'textarea',
+      '#default_value' => $template_mapper->getMappings(),
+    );
+
     /* You will need additional form elements for your custom properties. */
 
     return $form;

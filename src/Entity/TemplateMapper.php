@@ -54,4 +54,24 @@ class TemplateMapper extends ConfigEntityBase implements TemplateMapperInterface
    */
   protected $label;
 
+
+  protected $mappings;
+
+
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getMappings() {
+    return $this->mappings;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setMappings($mappings) {
+    $this->weight = $mappings;
+  }
+
+
 }
