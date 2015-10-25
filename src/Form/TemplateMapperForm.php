@@ -45,6 +45,7 @@ class TemplateMapperForm extends EntityForm {
 
     $form['mappings'] = array(
       '#type' => 'textarea',
+      '#title' => $this->t('Mappings'),
       '#default_value' => $template_mapper->getMappings(),
     );
 

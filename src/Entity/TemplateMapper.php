@@ -73,5 +73,18 @@ class TemplateMapper extends ConfigEntityBase implements TemplateMapperInterface
     $this->weight = $mappings;
   }
 
+  public function getMappingsArray() {
+
+    $return = array();
+    $mappings = explode("/", $this->mappings);
+    foreach ($mappings as $mapping) {
+      $exploded = explode(":", trim($mapping));
+      $return[$exploded[0]] = $exploded[1];
+
+
+    }
+    return $return;
+  }
+
 
 }

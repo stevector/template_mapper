@@ -42,8 +42,8 @@ function template_mapper_theme() {
 function template_mapper_theme_suggestions_node(array $variables)
 {
 
-  debug($variables['elements']['#view_mode']);
-  debug(array_keys($variables['elements']));
+  //debug($variables['elements']['#view_mode']);
+  //debug(array_keys($variables['elements']));
 
 //  $suggestion = 'node--' . $variables['elements']['#view_mode'];
   //return array($suggestion);
@@ -60,7 +60,12 @@ $variables, $hook) {
 
   if ($hook === 'node') {
 
-    debug($suggestions);
+
+
+   $thing =  \Drupal\template_mapper\Entity\TemplateMapper::load($hook);
+    debug($thing->getMappingsArray());
+
+
   }
 
 }
