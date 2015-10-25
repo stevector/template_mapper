@@ -31,3 +31,36 @@ function template_mapper_theme() {
 
   return $theme;
 }
+
+
+/**
+ * Implements hook_theme_suggestions_node().
+ */
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function template_mapper_theme_suggestions_node(array $variables)
+{
+
+  debug($variables['elements']['#view_mode']);
+  debug(array_keys($variables['elements']));
+
+//  $suggestion = 'node--' . $variables['elements']['#view_mode'];
+  //return array($suggestion);
+
+
+}
+
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function template_mapper_theme_suggestions_alter(array &$suggestions, array
+$variables, $hook) {
+
+  if ($hook === 'node') {
+
+    debug($suggestions);
+  }
+
+}
