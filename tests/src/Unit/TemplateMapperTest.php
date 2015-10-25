@@ -40,6 +40,8 @@ class TemplateMapperTest extends UnitTestCase {
     // Is a data provider better?
     $templateMapper = [
       'id' => 'node',
+      'mappings' => 'node__article:node__piece/node__teaser
+      :node__illustrated_list_item',
     ];
     $this->templateMapper = new TemplateMapper($templateMapper,
       'template_mapper');
@@ -50,6 +52,13 @@ class TemplateMapperTest extends UnitTestCase {
    */
   public function testGetIdMethod() {
 
+
+    $expected_mappings_array = [
+      'node__article' => 'node__piece',
+      'node__teaser' => 'node__illustrated_list_item',
+    ];
+    $this->assertEquals($expected_mappings_array,
+      $this->templateMapper->getMappingsArray());
 
     $this->assertEquals('node', $this->templateMapper->id());
   }

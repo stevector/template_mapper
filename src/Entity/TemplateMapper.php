@@ -79,9 +79,7 @@ class TemplateMapper extends ConfigEntityBase implements TemplateMapperInterface
     $mappings = explode("/", $this->mappings);
     foreach ($mappings as $mapping) {
       $exploded = explode(":", trim($mapping));
-      $return[$exploded[0]] = $exploded[1];
-
-
+      $return[trim($exploded[0])] = trim($exploded[1]);
     }
     return $return;
   }
