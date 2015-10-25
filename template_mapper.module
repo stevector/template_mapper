@@ -62,10 +62,39 @@ $variables, $hook) {
 
 
 
+
+
+
    $thing =  \Drupal\template_mapper\Entity\TemplateMapper::load($hook);
-    debug($thing->getMappingsArray());
+
+    $replacements = $thing->getMappingsArray();
+
+    debug($suggestions);
+
+//    foreach($suggestions as $original => $replacement) {
+//      if (in_array($original, $suggestions)) {
+//        array_replace();
+//
+//      }
+
+      $new_suggestions = array();
+      foreach ($suggestions as $suggestion) {
+
+        if (array_key_exists($suggestion, $replacements)) {
+          $new_suggestions[] = $replacements[$suggestion];
+        }
+        else {
+          $new_suggestions[] = $suggestion;
+        }
+
+      }
+      $suggestions = $new_suggestions;
+      debug($suggestions);
+
 
 
   }
+
+
 
 }
