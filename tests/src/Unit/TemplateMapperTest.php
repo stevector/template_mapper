@@ -51,7 +51,13 @@ class TemplateMapperTest extends UnitTestCase {
    * Tests the label method.
    */
   public function testGetIdMethod() {
+    $this->assertEquals('node', $this->templateMapper->id());
+  }
 
+  /**
+   * Tests the getMappingArray Method.
+   */
+  public function testGetMappingArrayMethod() {
 
     $expected_mappings_array = [
       'node__article' => 'node__piece',
@@ -60,6 +66,5 @@ class TemplateMapperTest extends UnitTestCase {
     $this->assertEquals($expected_mappings_array,
       $this->templateMapper->getMappingsArray());
 
-    $this->assertEquals('node', $this->templateMapper->id());
   }
 }
