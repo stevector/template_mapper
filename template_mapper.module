@@ -41,10 +41,11 @@ $variables, $hook) {
    // @todo, think about loading all template mappers into a service.
    // That will avoid a ton of individual loads. Also, the code here does
    // does not need to know anything about Entities.
-   $thing =  \Drupal\template_mapper\Entity\TemplateMapper::load($hook);
-  if ($thing) {
+   $TemplateMapper =  \Drupal\template_mapper\Entity\TemplateMapper::load
+   ($hook);
+  if ($TemplateMapper) {
     // @todo add an if check on thing;
 
-    $suggestions = $thing->performMapping($suggestions);
+    $suggestions = $TemplateMapper->performMapping($suggestions);
   }
 }
