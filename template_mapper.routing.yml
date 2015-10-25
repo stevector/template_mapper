@@ -1,0 +1,34 @@
+
+# TemplateMapper routing definition
+entity.template_mapper.collection:
+  path: '/admin/structure/template_mapper'
+  defaults:
+    _entity_list: 'template_mapper'
+    _title: 'Template mapper'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.template_mapper.add_form:
+  path: '/admin/structure/template_mapper/add'
+  defaults:
+    _entity_form: 'template_mapper.add'
+    _title: 'Add Template mapper'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.template_mapper.edit_form:
+  path: '/admin/structure/template_mapper/{template_mapper}'
+  defaults:
+    _entity_form: 'template_mapper.edit'
+    _title: 'Edit Template mapper'
+  requirements:
+    _permission: 'administer site configuration'
+
+entity.template_mapper.delete_form:
+  path: '/admin/structure/template_mapper/{template_mapper}/delete'
+  defaults:
+    _entity_form: 'template_mapper.delete'
+    _title: 'Delete Template mapper'
+  requirements:
+    _permission: 'administer site configuration'
+

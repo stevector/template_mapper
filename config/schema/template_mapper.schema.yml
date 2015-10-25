@@ -1,0 +1,12 @@
+template_mapper.template_mapper.*:
+  type: config_entity
+  label: 'Template mapper config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
