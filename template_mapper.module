@@ -61,21 +61,11 @@ $variables, $hook) {
   if ($hook === 'node') {
 
 
-
-
-
-
    $thing =  \Drupal\template_mapper\Entity\TemplateMapper::load($hook);
 
     $replacements = $thing->getMappingsArray();
 
     debug($suggestions);
-
-//    foreach($suggestions as $original => $replacement) {
-//      if (in_array($original, $suggestions)) {
-//        array_replace();
-//
-//      }
 
       $new_suggestions = array();
       foreach ($suggestions as $suggestion) {
@@ -90,11 +80,5 @@ $variables, $hook) {
       }
       $suggestions = $new_suggestions;
       debug($suggestions);
-
-
-
   }
-
-
-
 }
