@@ -85,4 +85,22 @@ class TemplateMapper extends ConfigEntityBase implements TemplateMapperInterface
   }
 
 
+  public function performMapping($existing_suggestions) {
+
+    $replacements = $this->getMappingsArray();
+
+    $new_suggestions = array();
+    foreach ($existing_suggestions as $suggestion) {
+
+      if (array_key_exists($suggestion, $replacements)) {
+        $new_suggestions[] = $replacements[$suggestion];
+      }
+      else {
+        $new_suggestions[] = $suggestion;
+      }
+
+    }
+    return $new_suggestions;
+  }
+
 }

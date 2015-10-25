@@ -65,6 +65,25 @@ class TemplateMapperTest extends UnitTestCase {
     ];
     $this->assertEquals($expected_mappings_array,
       $this->templateMapper->getMappingsArray());
+  }
+
+  /**
+   * Tests the performMapping Method.
+   */
+  public function testPerformMappingMethod() {
+
+    $existing_suggestions = [
+      'node',
+      'node__article',
+      'node__full',
+    ];
+    $expect_new_suggestions = [
+      'node',
+      'node__piece',
+      'node__full',
+    ];
+    $this->assertEquals($expect_new_suggestions,
+      $this->templateMapper->performMapping($existing_suggestions));
 
   }
 }
