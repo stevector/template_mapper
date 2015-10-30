@@ -37,14 +37,13 @@ function template_mapper_theme() {
  */
 function template_mapper_theme_suggestions_alter(array &$suggestions, array
 $variables, $hook) {
-
    // @todo, think about loading all template mappers into a service.
    // That will avoid a ton of individual loads. Also, the code here does
    // does not need to know anything about Entities.
    $TemplateMapper =  \Drupal\template_mapper\Entity\TemplateMapper::load
    ($hook);
+  // @todo Is there a better 'if' check to run?
   if ($TemplateMapper) {
-    // @todo add an if check on thing;
 
     $suggestions = $TemplateMapper->performMapping($suggestions);
   }
