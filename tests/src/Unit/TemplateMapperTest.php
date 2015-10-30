@@ -40,8 +40,7 @@ class TemplateMapperTest extends UnitTestCase {
     // Is a data provider better?
     $templateMapper = [
       'id' => 'node',
-      'mappings' => 'node__article:node__piece/node__teaser
-      :node__illustrated_list_item',
+      'mappings' => 'node__article|node__piece/node__teaser|node__illustrated_list_item',
     ];
     $this->templateMapper = new TemplateMapper($templateMapper,
       'template_mapper');
