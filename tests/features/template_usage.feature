@@ -6,6 +6,9 @@
     Scenario: No template overridden used prior to configuring module.
       Given I am logged in as a user with the "create article content" permissions
       And I visit "node/add/article"
+      And I fill in "Title" with "First Article Node"
+      And print last response
+      And I press the "Save" button
       # todo, update name
       Then I should not see the text "node--longform-prose.html.twig"
       Then I should see the text "node.html.twig"
