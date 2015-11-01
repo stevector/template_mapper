@@ -1,3 +1,4 @@
+# @todo, determine how best to use Travis build caches.
 language: php
 
 php:
