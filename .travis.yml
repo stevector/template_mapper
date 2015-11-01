@@ -36,7 +36,7 @@ before_install:
 
 install:
   # Basic PHP packages.
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
+  #- sudo apt-get install -y --force-yes php5-cgi php5-mysql
 
   # Move the checked out module into the correct structure.
   - mkdir /tmp/$MODULE_NAME
