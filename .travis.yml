@@ -1,3 +1,5 @@
+# This line should trigger Travis to use the container infrastructure.
+sudo: false
 # @todo, determine how best to use Travis build caches.
 language: php
 
