@@ -1,68 +1,121 @@
-# This line should trigger Travis to use the container infrastructure.
-#sudo: false
-# @todo, determine how best to use Travis build caches.
+# @file
+# .travis.yml - Drupal for Travis CI Integration
+#
+# Template provided by https://github.com/LionsAd/drupal_ti.
+#
+# Based for simpletest upon:
+#   https://github.com/sonnym/travis-ci-drupal-module-example
+
 language: php
 
-php:
-  # @todo add php 7.
-  - 5.5
-  - 5.6
+sudo: false
 
+php:
+  #- 5.3
+  #- 5.4
+  - 5.5
+  #- 5.6
+  #- 7
+  #- hhvm
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
 
 env:
   global:
-    - MODULE_NAME='template_mapper'
-    - MODULE_TEST_GROUP='template_mapper'
-    - DRUPAL_REPO='git://drupalcode.org/project/drupal.git'
-    - DRUPAL_VERSION='8.0.x'
+    # add composer's global bin directory to the path
+    # see: https://github.com/drush-ops/drush#install---composer
+    - PATH="$PATH:$HOME/.composer/vendor/bin"
 
-matrix:
-  allow-failures:
-    - php: 5.5
+    # Configuration variables.
+    - DRUPAL_TI_MODULE_NAME="template_mapper"
+    - DRUPAL_TI_SIMPLETEST_GROUP="template_mapper"
+
+    # Define runners and environment vars to include before and after the
+    # main runners / environment vars.
+    #- DRUPAL_TI_SCRIPT_DIR_BEFORE="./drupal_ti/before"
+    #- DRUPAL_TI_SCRIPT_DIR_AFTER="./drupal_ti/after"
+
+    # The environment to use, supported are: drupal-7, drupal-8
+    - DRUPAL_TI_ENVIRONMENT="drupal-8"
+
+    # Drupal specific variables.
+    - DRUPAL_TI_DB="drupal_travis_db"
+    - DRUPAL_TI_DB_URL="mysql://root:@127.0.0.1/drupal_travis_db"
+    # Note: Do not add a trailing slash here.
+    - DRUPAL_TI_WEBSERVER_URL="http://127.0.0.1"
+    - DRUPAL_TI_WEBSERVER_PORT="8080"
+
+    # Simpletest specific commandline arguments, the DRUPAL_TI_SIMPLETEST_GROUP is appended at the end.
+    - DRUPAL_TI_SIMPLETEST_ARGS="--verbose --color --concurrency 4 --url $DRUPAL_TI_WEBSERVER_URL:$DRUPAL_TI_WEBSERVER_PORT"
+
+    # === Behat specific variables.
+    # This is relative to $TRAVIS_BUILD_DIR
+    # @todo, change to ./test/behat
+    - DRUPAL_TI_BEHAT_DIR="./tests"
+    # These arguments are passed to the bin/behat command.
+    - DRUPAL_TI_BEHAT_ARGS=""
+    # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
+    - DRUPAL_TI_BEHAT_YML="behat.travis.yml"
+    # This is used to setup Xvfb.
+    - DRUPAL_TI_BEHAT_SCREENSIZE_COLOR="1280x1024x16"
+    # The version of selenium that should be used.
+    - DRUPAL_TI_BEHAT_SELENIUM_VERSION="2.48.2"
+    # Set DRUPAL_TI_BEHAT_DRIVER to "selenium" to use "firefox" or "chrome" here.
+    - DRUPAL_TI_BEHAT_DRIVER="phantomjs"
+    - DRUPAL_TI_BEHAT_BROWSER="firefox"
+
+    # PHPUnit specific commandline arguments.
+    - DRUPAL_TI_PHPUNIT_ARGS=""
+    # Specifying the phpunit-core src/ directory is useful when e.g. a vendor/
+    # directory is present in the module directory, which phpunit would then
+    # try to find tests in. This option is relative to $TRAVIS_BUILD_DIR.
+    #- DRUPAL_TI_PHPUNIT_CORE_SRC_DIRECTORY="./tests/src"
+
+    # Code coverage via coveralls.io
+    - DRUPAL_TI_COVERAGE="satooshi/php-coveralls:0.6.*"
+    # This needs to match your .coveralls.yml file.
+    - DRUPAL_TI_COVERAGE_FILE="build/logs/clover.xml"
+
+    # Debug options
+    #- DRUPAL_TI_DEBUG="-x -v"
+    # Set to "all" to output all files, set to e.g. "xvfb selenium" or "selenium",
+    # etc. to only output those channels.
+    #- DRUPAL_TI_DEBUG_FILE_OUTPUT="selenium xvfb webserver"
+
+  matrix:
+    # [[[ SELECT ANY OR MORE OPTIONS ]]]
+    - DRUPAL_TI_RUNNERS="phpunit"
+    #- DRUPAL_TI_RUNNERS="simpletest"
+    #- DRUPAL_TI_RUNNERS="behat"
+    #- DRUPAL_TI_RUNNERS="phpunit simpletest behat"
+    # Use phpunit-core to test modules with phpunit with Drupal 8 core.
+    #- DRUPAL_TI_RUNNERS="phpunit-core"
+
+mysql:
+  database: drupal_travis_db
+  username: root
+  encoding: utf8
 
 before_install:
-
-  # Composer.
-  - sed -i '1i export PATH="$HOME/.composer/vendor/bin:$PATH"' $HOME/.bashrc
-  - source $HOME/.bashrc
-  # - composer self-update
-
-  # Drush.
-  - composer global require "youngj/httpserver:dev-master#41dd2b7"
-  - composer global require drush/drush:dev-master
-
-  # Ensure the PHP environment is ready.
-  - phpenv rehash
+  - composer self-update
+  - cd ./tests
+  - composer global require "lionsad/drupal_ti:1.*"
+  - drupal-ti before_install
 
 install:
-  # Basic PHP packages.
-  - sudo apt-get install -y --force-yes php5-cgi php5-mysql
-
-  # Move the checked out module into the correct structure.
-  - mkdir /tmp/$MODULE_NAME
-  - mv * /tmp/$MODULE_NAME/
-  - git clone --branch $DRUPAL_VERSION $DRUPAL_REPO drupal --depth 1
-  - mv /tmp/$MODULE_NAME drupal/modules/
+  - drupal-ti install
 
 before_script:
-  # This fixes a fail when install Drupal.
-  - echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
-  # Mysql might time out for long tests, increase the wait timeout.
-  - mysql -e 'SET @@GLOBAL.wait_timeout=1200'
-
-  # Install Drupal and enable the required modules (including this one).
-  - mysql -e 'create database drupal;'
-  # @todo, don't use the standard profile.
-  - cd $TRAVIS_BUILD_DIR/drupal && drush --yes site-install standard --db-url="mysql://root@127.0.0.1/drupal"
-  - cd $TRAVIS_BUILD_DIR/drupal/modules/template_mapper/tests && composer install --prefer-source --no-interaction
-  - cd $TRAVIS_BUILD_DIR/drupal && drush --yes en $MODULE_NAME
-
-  # Start a web server.
-  - drush runserver 127.0.0.1:8080 &
-  - until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
+  - drupal-ti before_script
 
 script:
-  # Run code sniffer.
-  - cd $TRAVIS_BUILD_DIR/drupal/modules/template_mapper/tests && ./vendor/bin/behat -f pretty --config behat.travis.yml
-  - cd $TRAVIS_BUILD_DIR/drupal/core && ./vendor/bin/phpunit  --group template_mapper
+  - drupal-ti script
+
+after_script:
+  - drupal-ti after_script
+
+notifications:
+  email: false
