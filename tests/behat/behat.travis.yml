@@ -13,7 +13,7 @@ default:
       browser_name: firefox
     Drupal\DrupalExtension:
       blackbox: ~
-      api_driver: "drush"
+      api_driver: "drupal"
       drush_driver: "drush"
       drush:
         root: "$DRUPAL_TI_DRUPAL_DIR"
