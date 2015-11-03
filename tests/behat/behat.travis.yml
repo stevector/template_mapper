@@ -1,6 +1,3 @@
-imports:
-    - behat.yml
-
 default:
   suites:
     default:
