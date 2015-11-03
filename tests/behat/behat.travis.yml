@@ -18,4 +18,4 @@ default:
       drush:
         root: "$DRUPAL_TI_DRUPAL_DIR"
       drupal:
-        drupal_root: '../../../..'
+        drupal_root: "$DRUPAL_TI_DRUPAL_DIR"
