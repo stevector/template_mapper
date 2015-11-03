@@ -17,3 +17,5 @@ default:
       drush_driver: "drush"
       drush:
         root: "$DRUPAL_TI_DRUPAL_DIR"
+      drupal:
+        drupal_root: '../../../..'
