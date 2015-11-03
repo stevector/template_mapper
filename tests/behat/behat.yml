@@ -17,6 +17,6 @@ default:
       api_driver: 'drupal'
       drush:
         alias: self
-        root: '../../..'
+        root: '../../../..'
       drupal:
-        drupal_root: '../../..'
+        drupal_root: '../../../..'
