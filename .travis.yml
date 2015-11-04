@@ -37,10 +37,11 @@ env:
     # Define runners and environment vars to include before and after the
     # main runners / environment vars.
     #- DRUPAL_TI_SCRIPT_DIR_BEFORE="./drupal_ti/before"
-    #- DRUPAL_TI_SCRIPT_DIR_AFTER="./drupal_ti/after"
+    - DRUPAL_TI_SCRIPT_DIR_AFTER="./drupal_ti"
 
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
+    # @todo, make this work.
     - DRUPAL_TI_INSTALL_PROFILE="standard"
 
     # Drupal specific variables.
@@ -104,7 +105,7 @@ before_install:
   - composer self-update
   - cd ./tests/behat
   # @todo, make pull request for install profile variable.
-  - composer global require "stevector/drupal_ti:dev-variable-for-install-profile as 1.0.x-dev"
+  - composer global require "lionsad/drupal_ti:1.*"
   - drupal-ti before_install
 
 install:
