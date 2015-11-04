@@ -104,7 +104,7 @@ before_install:
   - composer self-update
   - cd ./tests/behat
   # @todo, make pull request for install profile variable.
-  - composer global require "stevector/drupal_ti:variable-for-install-profile"
+  - composer global require "stevector/drupal_ti:dev-variable-for-install-profile as 1.0.x-dev"
   - drupal-ti before_install
 
 install:
