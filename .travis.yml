@@ -41,6 +41,7 @@ env:
 
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
+    - DRUPAL_TI_INSTALL_PROFILE="standard"
 
     # Drupal specific variables.
     - DRUPAL_TI_DB="drupal_travis_db"
@@ -102,7 +103,8 @@ mysql:
 before_install:
   - composer self-update
   - cd ./tests/behat
-  - composer global require "lionsad/drupal_ti:1.*"
+  # @todo, make pull request for install profile variable.
+  - composer global require "stevector/drupal_ti:variable-for-install-profile"
   - drupal-ti before_install
 
 install:
