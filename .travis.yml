@@ -108,7 +108,7 @@ before_install:
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
   - pwd
-  - echo DRUPAL_TI_DRUPAL_DIR
+
 
   - ls -al  /home/travis/build/stevector/template_mapper/tests/behat/vendor/bin
   - ls -al /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti
@@ -118,7 +118,7 @@ before_install:
 
 
 
-  - cd DRUPAL_TI_DRUPAL_DIR && sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE; sites/default/settings.php'
+
 
 install:
   -  bash /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti install
@@ -127,6 +127,9 @@ before_script:
   - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_script
 
 script:
+  - echo "$DRUPAL_TI_DRUPAL_DIR"
+  - cd "$DRUPAL_TI_DRUPAL_DIR" && sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE; sites/default/settings.php'
+
   - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti script
 
 after_script:
