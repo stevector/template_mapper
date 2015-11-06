@@ -36,11 +36,14 @@ env:
 
     # Define runners and environment vars to include before and after the
     # main runners / environment vars.
-    #- DRUPAL_TI_SCRIPT_DIR_BEFORE="./drupal_ti/before"
-    #- DRUPAL_TI_SCRIPT_DIR_AFTER="./drupal_ti/after"
+   - DRUPAL_TI_SCRIPT_DIR_BEFORE="./.drupal_ti/before"
+   - DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal_ti/after"
+
 
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
+    # @todo, make this work.
+    - DRUPAL_TI_INSTALL_PROFILE="standard"
 
     # Drupal specific variables.
     - DRUPAL_TI_DB="drupal_travis_db"
@@ -54,7 +57,7 @@ env:
 
     # === Behat specific variables.
     # This is relative to $TRAVIS_BUILD_DIR
-    - DRUPAL_TI_BEHAT_DIR="./tests"
+    - DRUPAL_TI_BEHAT_DIR="./tests/behat"
     # These arguments are passed to the bin/behat command.
     - DRUPAL_TI_BEHAT_ARGS=""
     # Specify the filename of the behat.yml with the $DRUPAL_TI_DRUPAL_DIR variables.
@@ -92,7 +95,7 @@ env:
     #- DRUPAL_TI_RUNNERS="behat"
     #- DRUPAL_TI_RUNNERS="phpunit simpletest behat"
     # Use phpunit-core to test modules with phpunit with Drupal 8 core.
-    - DRUPAL_TI_RUNNERS="phpunit-core"
+    - DRUPAL_TI_RUNNERS="phpunit-core behat"
 
 mysql:
   database: drupal_travis_db
@@ -101,7 +104,8 @@ mysql:
 
 before_install:
   - composer self-update
-  - cd ./tests
+  - cd ./tests/behat
+  # @todo, make pull request for install profile variable.
   - composer global require "lionsad/drupal_ti:1.*"
   - drupal-ti before_install
 
