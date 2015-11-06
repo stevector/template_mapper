@@ -78,11 +78,6 @@ env:
     # This needs to match your .coveralls.yml file.
     - DRUPAL_TI_COVERAGE_FILE="build/logs/clover.xml"
 
-    # Define runners and environment vars to include before and after the
-    # main runners / environment vars.
-   - DRUPAL_TI_SCRIPT_DIR_BEFORE="./.drupal_ti/before"
-   - DRUPAL_TI_SCRIPT_DIR_AFTER="./.drupal_ti/after"
-
 
     # Debug options
     #- DRUPAL_TI_DEBUG="-x -v"
