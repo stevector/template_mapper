@@ -14,7 +14,7 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class TemplateMappingForm.
  *
- * @package Drupal\template_mapping\Form
+ * @package Drupal\template_mapper\Form
  */
 class TemplateMappingForm extends EntityForm {
   /**
@@ -37,7 +37,7 @@ class TemplateMappingForm extends EntityForm {
       '#type' => 'machine_name',
       '#default_value' => $template_mapping->id(),
       '#machine_name' => array(
-        'exists' => '\Drupal\template_mapping\Entity\TemplateMapping::load',
+        'exists' => '\Drupal\template_mapper\Entity\TemplateMapping::load',
       ),
       '#disabled' => !$template_mapping->isNew(),
     );
