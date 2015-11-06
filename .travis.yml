@@ -42,7 +42,7 @@ env:
 
     # The environment to use, supported are: drupal-7, drupal-8
     - DRUPAL_TI_ENVIRONMENT="drupal-8"
-    # @todo, make this work.
+    # @todo, make this work. See https://github.com/LionsAd/drupal_ti/pull/58
     - DRUPAL_TI_INSTALL_PROFILE="standard"
 
     # Drupal specific variables.
