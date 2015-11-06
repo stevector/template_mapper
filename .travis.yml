@@ -107,6 +107,7 @@ before_install:
   - composer self-update
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
+  - ls -al /home/travis/build/stevector/template_mapper/tests/behat/vendor/bin
   - export PATH="$PATH:/home/travis/build/stevector/template_mapper/tests/behat/vendor/bin"
   - drupal-ti before_install
 
