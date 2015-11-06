@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo 'HELLO WORLD';
+
+
 function drupal_ti_install_drupal() {
 	git clone --depth 1 --branch 8.0.x http://git.drupal.org/project/drupal.git
 	cd drupal
