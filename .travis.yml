@@ -109,6 +109,7 @@ before_install:
   #- composer global require "lionsad/drupal_ti:1.*"
   - pwd
   - ls -al  /home/travis/build/stevector/template_mapper/tests/behat/vendor/bin
+  - ls -al/home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/
   - ./home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_install
 
 install:
