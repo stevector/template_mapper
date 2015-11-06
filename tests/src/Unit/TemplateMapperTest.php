@@ -10,13 +10,13 @@
 
 namespace Drupal\Tests\template_mapper;
 
-use Drupal\template_mapper\Entity\TemplateMapper;
+use Drupal\template_mapper\Entity\TemplateMapping;
 use Drupal\Tests\UnitTestCase;
 
 /**
  * Test the WorkflowState Class.
  *
- * @coversDefaultClass Drupal\template_mapper\Entity\TemplateMapper
+ * @coversDefaultClass Drupal\template_mapper\Entity\TemplateMapping
  * @group template_mapper
  */
 class TemplateMapperTest extends UnitTestCase {
@@ -24,7 +24,7 @@ class TemplateMapperTest extends UnitTestCase {
   /**
    * The autocomplete controller.
    *
-   * @var Drupal\template_mapper\Entity\TemplateMapper;
+   * @var Drupal\template_mapper\Entity\TemplateMapping;
    */
   protected $templateMapper;
 
@@ -43,8 +43,7 @@ class TemplateMapperTest extends UnitTestCase {
       // @todo, switch from "/" to line breaks for separating mappings.
       'mappings' => 'node__article|node__piece/node__teaser|node__illustrated_list_item',
     ];
-    $this->templateMapper = new TemplateMapper($templateMapper,
-      'template_mapper');
+    $this->templateMapper = new TemplateMapping($templateMapper, 'template_mapper');
   }
 
   /**

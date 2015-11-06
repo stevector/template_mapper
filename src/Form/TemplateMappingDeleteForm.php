@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\template_mapper\Form\TemplateMapperDeleteForm.
+ * Contains Drupal\template_mapper\Form\TemplateMappingDeleteForm.
  */
 
 namespace Drupal\template_mapper\Form;
@@ -12,9 +12,9 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Builds the form to delete Template mapper entities.
+ * Builds the form to delete Template mapping entities.
  */
-class TemplateMapperDeleteForm extends EntityConfirmFormBase {
+class TemplateMappingDeleteForm extends EntityConfirmFormBase {
   /**
    * {@inheritdoc}
    */
@@ -26,7 +26,7 @@ class TemplateMapperDeleteForm extends EntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.template_mapper.collection');
+    return new Url('entity.template_mapping.collection');
   }
 
   /**

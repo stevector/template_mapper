@@ -30,7 +30,7 @@
       #  | administer site configuration |
 
       Given I am logged in as a user with the "administrator" role
-      And I go to "admin/structure/template_mapper/add"
+      And I go to "admin/structure/template_mapping/add"
       And I fill in "Label" with "node"
       And I fill in "Machine-readable name" with "node"
       And I fill in "Mappings" with "node__article__full|node__longform_prose/node__page__full|node__marketing_message"
@@ -54,6 +54,6 @@
       # @todo make permissions specific to this module.
       # @todo, there is no "Then" statement here. It is just cleanup.
       Given I am logged in as a user with the "administrator" role
-      And I go to "admin/structure/template_mapper"
+      And I go to "admin/structure/template_mapping"
       And I click "Delete" in the "node" row
       And I press the "Delete" button
