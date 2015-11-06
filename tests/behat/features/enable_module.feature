@@ -3,6 +3,10 @@
     As an administrator,
     I want to verify that Template Mapper is enabled
 
+    Scenario: Drush debugging
+      Given I run drush "status"
+      Then print last drush output
+
     # @todo Figure out how to do $settings['extension_discovery_scan_tests'] = TRUE;
     # outside of settings file.
 
@@ -22,5 +26,5 @@
       # Given the theme "template_mapper_test_theme" is enabled
       # Given the theme "template_mapper_test_theme" is the active theme
       Given I am logged in as a user with the "administer themes" permissions
-      And I visit "/admin/appearance
+      And I visit "/admin/appearance"
       Then I follow "Install Template Mapper Test Theme as default theme"
