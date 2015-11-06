@@ -128,7 +128,7 @@ before_script:
 
 script:
   - echo "$DRUPAL_TI_DRUPAL_DIR"
-  - cd "$DRUPAL_TI_DRUPAL_DIR" && sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE; sites/default/settings.php'
+  - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
 
   - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti script
 
