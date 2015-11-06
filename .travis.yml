@@ -105,7 +105,6 @@ mysql:
 
 before_install:
   - composer self-update
-  - cd ./tests/behat
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
   - ./tests/behat/vendor/bin/drupal-ti before_install
@@ -117,7 +116,7 @@ before_script:
   - ./tests/behat/vendor/bin/drupal-ti before_script
 
 script:
-  - cd  $DRUPAL_TI_DRUPAL_DIR && drush si standard -y
+
   - ./tests/behat/tests/behat/vendor/bin/drupal-ti script
 
 after_script:
