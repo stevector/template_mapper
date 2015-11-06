@@ -105,17 +105,16 @@ mysql:
 
 before_install:
   - composer self-update
+  - cd /home/travis/build/stevector/template_mapper/tests/behat && composer install
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
-  - ls -al /home/travis/build/stevector/template_mapper/tests/behat/vendor/bin
-  - export PATH="$PATH:/home/travis/build/stevector/template_mapper/tests/behat/vendor/bin"
-  - drupal-ti before_install
+  - bash /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_install
 
 install:
-  -  drupal-ti install
+  -  bash /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti install
 
 before_script:
-  - drupal-ti before_script
+  - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_script
 
 script:
   # @todo, there has to be a better way to set extension_discover_scan_tests.
@@ -123,10 +122,10 @@ script:
   - chmod 777 /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
   - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
 
-  - drupal-ti script
+  - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti script
 
 after_script:
-  - drupal-ti after_script
+  -  bash /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti after_script
 
 notifications:
   email: false
