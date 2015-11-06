@@ -1940,36 +1940,6 @@
         ]
     },
     {
-        "name": "lionsad/drupal_ti",
-        "version": "dev-variable-for-install-profile",
-        "version_normalized": "dev-variable-for-install-profile",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/stevector/drupal_ti",
-            "reference": "73fc51e4ac5da23500849522723d247ef2cc36a4"
-        },
-        "require": {
-            "php": ">=5.3.0"
-        },
-        "time": "2015-11-04 21:18:37",
-        "bin": [
-            "drupal-ti"
-        ],
-        "type": "library",
-        "installation-source": "source",
-        "license": [
-            "GPL-2.0+"
-        ],
-        "authors": [
-            {
-                "name": "Fabian Franz",
-                "email": "fabian@lionsad.de"
-            }
-        ],
-        "description": "Drupal - Travis Integration",
-        "homepage": "https://github.com/LionsAd/drupal_ti"
-    },
-    {
         "name": "sebastian/version",
         "version": "1.0.6",
         "version_normalized": "1.0.6.0",
@@ -2995,5 +2965,35 @@
         ],
         "description": "Drush is a command line shell and scripting interface for Drupal, a veritable Swiss Army knife designed to make life easier for those of us who spend some of our working hours hacking away at the command prompt.",
         "homepage": "http://www.drush.org"
+    },
+    {
+        "name": "lionsad/drupal_ti",
+        "version": "dev-variable-for-install-profile",
+        "version_normalized": "dev-variable-for-install-profile",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/stevector/drupal_ti",
+            "reference": "73fc51e4ac5da23500849522723d247ef2cc36a4"
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-11-04 21:18:37",
+        "bin": [
+            "drupal-ti"
+        ],
+        "type": "library",
+        "installation-source": "source",
+        "license": [
+            "GPL-2.0+"
+        ],
+        "authors": [
+            {
+                "name": "Fabian Franz",
+                "email": "fabian@lionsad.de"
+            }
+        ],
+        "description": "Drupal - Travis Integration",
+        "homepage": "https://github.com/LionsAd/drupal_ti"
     }
 ]
