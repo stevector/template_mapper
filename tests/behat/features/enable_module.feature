@@ -3,10 +3,6 @@
     As an administrator,
     I want to verify that Template Mapper is enabled
 
-    Scenario: Drush debugging
-      Given I run drush "status"
-      Then print last drush output
-
     # @todo Figure out how to do $settings['extension_discovery_scan_tests'] = TRUE;
     # outside of settings file.
 
