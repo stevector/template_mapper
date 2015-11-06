@@ -128,6 +128,10 @@ before_script:
 
 script:
   - echo "$DRUPAL_TI_DRUPAL_DIR"
+  - cat /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
+  - cat /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.local.php
+  - ls -al  /home/travis/build/stevector/drupal-8/drupal/sites/default
+  - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.local.php
   - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
 
   - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti script
