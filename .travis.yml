@@ -107,21 +107,21 @@ before_install:
   - composer self-update
   - cd ./tests/behat
   # @todo, make pull request for install profile variable.
-  - composer global require "lionsad/drupal_ti:1.*"
-  - drupal-ti before_install
+  #- composer global require "lionsad/drupal_ti:1.*"
+  - ./vendor/bin/drupal-ti before_install
 
 install:
-  - drupal-ti install
+  - ./vendor/bin/drupal-ti install
 
 before_script:
-  - drupal-ti before_script
+  - ./vendor/bin/drupal-ti before_script
 
 script:
   - cd  $DRUPAL_TI_DRUPAL_DIR && drush si standard -y
-  - drupal-ti script
+  - ./vendor/bin/drupal-ti script
 
 after_script:
-  - drupal-ti after_script
+  - ./vendor/bin/drupal-ti after_script
 
 notifications:
   email: false
