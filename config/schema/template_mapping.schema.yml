@@ -1,4 +1,4 @@
-template_mapper.template_mapper.*:
+template_mapper.template_mapping.*:
   type: config_entity
   label: 'Template mapping config'
   mapping:
