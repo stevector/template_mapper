@@ -133,7 +133,6 @@ script:
   - ls -al  /home/travis/build/stevector/drupal-8/drupal/sites/default
   - chmod 777 /home/travis/build/stevector/drupal-8/drupal/sites/default
   - chmod 777 /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
-  - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.local.php
   - sed -i '$ a\ $settings['extension_discovery_scan_tests'] = TRUE;' /home/travis/build/stevector/drupal-8/drupal/sites/default/settings.php
 
   - bash  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti script
