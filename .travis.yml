@@ -105,7 +105,6 @@ mysql:
 
 before_install:
   - composer self-update
-  - cd /home/travis/build/stevector/template_mapper/tests/behat && composer install.
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
   - export PATH="$PATH:/home/travis/build/stevector/template_mapper/tests/behat/vendor/bin"
