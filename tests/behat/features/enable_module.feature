@@ -22,5 +22,5 @@
       # Given the theme "template_mapper_test_theme" is enabled
       # Given the theme "template_mapper_test_theme" is the active theme
       Given I am logged in as a user with the "administer themes" permissions
-      And I visit "/admin/appearance
+      And I visit "/admin/appearance"
       Then I follow "Install Template Mapper Test Theme as default theme"
