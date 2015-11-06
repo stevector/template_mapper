@@ -17,11 +17,11 @@ use Drupal\template_mapper\TemplateMappingInterface;
  *   id = "template_mapping",
  *   label = @Translation("Template mapping"),
  *   handlers = {
- *     "list_builder" = "Drupal\template_mapping\TemplateMappingListBuilder",
+ *     "list_builder" = "Drupal\template_mapper\TemplateMappingListBuilder",
  *     "form" = {
- *       "add" = "Drupal\template_mapping\Form\TemplateMappingForm",
- *       "edit" = "Drupal\template_mapping\Form\TemplateMappingForm",
- *       "delete" = "Drupal\template_mapping\Form\TemplateMappingDeleteForm"
+ *       "add" = "Drupal\template_mapper\Form\TemplateMappingForm",
+ *       "edit" = "Drupal\template_mapper\Form\TemplateMappingForm",
+ *       "delete" = "Drupal\template_mapper\Form\TemplateMappingDeleteForm"
  *     }
  *   },
  *   config_prefix = "template_mapping",
