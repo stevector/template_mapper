@@ -108,7 +108,7 @@ before_install:
   # @todo, make pull request for install profile variable.
   #- composer global require "lionsad/drupal_ti:1.*"
    - cd ./tests
-  - ./behat/vendor/bin/drupal-ti before_install
+   - ./behat/vendor/bin/drupal-ti before_install
 
 install:
   - ./tests/behat/vendor/bin/drupal-ti install
