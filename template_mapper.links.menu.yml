@@ -1,7 +1,7 @@
-# Template mapper menu items definition
-entity.template_mapper.collection:
-  title: 'Template mapper'
-  route_name: entity.template_mapper.collection
-  description: 'List Template mapper'
+# Template mapping menu items definition
+entity.template_mapping.collection:
+  title: 'Template mapping'
+  route_name: entity.template_mapping.collection
+  description: 'List Template mapping'
   parent: system.admin_structure
 

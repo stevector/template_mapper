@@ -1,6 +1,6 @@
-entity.template_mapper.add_form:
-  route_name: 'entity.template_mapper.add_form'
-  title: 'Add Template mapper'
+entity.template_mapping.add_form:
+  route_name: 'entity.template_mapping.add_form'
+  title: 'Add Template mapping'
   appears_on:
-    - entity.template_mapper.collection
+    - entity.template_mapping.collection
 

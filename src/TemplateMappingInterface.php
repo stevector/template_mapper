@@ -10,9 +10,9 @@ namespace Drupal\template_mapper;
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 
 /**
- * Provides an interface for defining Template mapper entities.
+ * Provides an interface for defining Template mapping entities.
  */
-interface TemplateMapperInterface extends ConfigEntityInterface {
+interface TemplateMappingInterface extends ConfigEntityInterface {
   // Add get/set methods for your configuration properties here.
 
 }

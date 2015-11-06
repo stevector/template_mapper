@@ -1,6 +1,6 @@
 template_mapper.template_mapper.*:
   type: config_entity
-  label: 'Template mapper config'
+  label: 'Template mapping config'
   mapping:
     id:
       type: string

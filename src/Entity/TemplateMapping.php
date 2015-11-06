@@ -2,29 +2,29 @@
 
 /**
  * @file
- * Contains Drupal\template_mapper\Entity\TemplateMapper.
+ * Contains Drupal\template_mapper\Entity\TemplateMapping.
  */
 
 namespace Drupal\template_mapper\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
-use Drupal\template_mapper\TemplateMapperInterface;
+use Drupal\template_mapper\TemplateMappingInterface;
 
 /**
- * Defines the Template mapper entity.
+ * Defines the Template mapping entity.
  *
  * @ConfigEntityType(
- *   id = "template_mapper",
- *   label = @Translation("Template mapper"),
+ *   id = "template_mapping",
+ *   label = @Translation("Template mapping"),
  *   handlers = {
- *     "list_builder" = "Drupal\template_mapper\TemplateMapperListBuilder",
+ *     "list_builder" = "Drupal\template_mapping\TemplateMappingListBuilder",
  *     "form" = {
- *       "add" = "Drupal\template_mapper\Form\TemplateMapperForm",
- *       "edit" = "Drupal\template_mapper\Form\TemplateMapperForm",
- *       "delete" = "Drupal\template_mapper\Form\TemplateMapperDeleteForm"
+ *       "add" = "Drupal\template_mapping\Form\TemplateMappingForm",
+ *       "edit" = "Drupal\template_mapping\Form\TemplateMappingForm",
+ *       "delete" = "Drupal\template_mapping\Form\TemplateMappingDeleteForm"
  *     }
  *   },
- *   config_prefix = "template_mapper",
+ *   config_prefix = "template_mapping",
  *   admin_permission = "administer site configuration",
  *   entity_keys = {
  *     "id" = "id",
@@ -32,23 +32,23 @@ use Drupal\template_mapper\TemplateMapperInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/admin/structure/template_mapper/{template_mapper}",
- *     "edit-form" = "/admin/structure/template_mapper/{template_mapper}/edit",
- *     "delete-form" = "/admin/structure/template_mapper/{template_mapper}/delete",
+ *     "canonical" = "/admin/structure/template_mapping/{template_mapping}",
+ *     "edit-form" = "/admin/structure/template_mapping/{template_mapping}/edit",
+ *     "delete-form" = "/admin/structure/template_mapping/{template_mapping}/delete",
  *     "collection" = "/admin/structure/visibility_group"
  *   }
  * )
  */
-class TemplateMapper extends ConfigEntityBase implements TemplateMapperInterface {
+class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterface {
   /**
-   * The Template mapper ID.
+   * The Template mapping ID.
    *
    * @var string
    */
   protected $id;
 
   /**
-   * The Template mapper label.
+   * The Template mapping label.
    *
    * @var string
    */
