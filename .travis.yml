@@ -117,7 +117,7 @@ before_script:
   - drupal-ti before_script
 
 script:
-  - cd  $TRAVIS_BUILD_DIR/drupal_travis/drupal && drush si standard -y
+  - cd  $DRUPAL_TI_DRUPAL_DIR && drush si standard -y
   - drupal-ti script
 
 after_script:
