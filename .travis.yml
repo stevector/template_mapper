@@ -110,7 +110,9 @@ before_install:
   - pwd
   - ls -al  /home/travis/build/stevector/template_mapper/tests/behat/vendor/bin
   - ls -al /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti
-  - ./home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_install
+  -    du  /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti
+  - cat     /home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti
+  -       ./home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti before_install
 
 install:
   - ./home/travis/build/stevector/template_mapper/tests/behat/vendor/lionsad/drupal_ti/drupal-ti install
