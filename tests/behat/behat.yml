@@ -16,7 +16,6 @@ default:
       blackbox: ~
       api_driver: 'drupal'
       drush:
-        alias: self
         root: '../../../..'
       drupal:
         drupal_root: '../../../..'
