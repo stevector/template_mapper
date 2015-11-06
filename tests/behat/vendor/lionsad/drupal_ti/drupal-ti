@@ -1,0 +1,93 @@
+#!/bin/bash
+# @file
+# Simple script to run the given command for all enabled runners.
+
+set -e $DRUPAL_TI_DEBUG
+
+CMD=$1
+
+if [ -z "$CMD" -o -z "$DRUPAL_TI_RUNNERS" ]
+then
+	echo "Usage: $0 <cmd>" 1>&2
+	echo "" 1>&2
+	echo "- cmd: A valid travis-ci command, e.g. before-script, script, after-script." 1>&2
+	echo "" 1>&2
+	echo "       Use --include to include an arbitrary script within the drupal_ti environment." 1>&2
+	echo "       Use --load-cache to load caches." 1>&2
+	echo "       Use --save-cache to save caches." 1>&2
+	echo "       Use --sync-cache to check cache for differences via rsync." 1>&2
+	echo "" 1>&2
+	exit 1
+fi
+
+### Path resolving from drush/drush:drush
+
+# Get the absolute path of this executable
+SELF_DIRNAME=$(dirname -- $0)
+SELF_PATH=$(cd -P -- "$SELF_DIRNAME" && pwd -P)/$(basename -- $0)
+
+# Resolve symlinks - this is the equivalent of "readlink -f", but also works with non-standard OS X readlink.
+while [ -h "$SELF_PATH" ]; do
+    # 1) cd to directory of the symlink
+    # 2) cd to the directory of where the symlink points
+    # 3) Get the pwd
+    # 4) Append the basename
+    DIR=$(dirname -- "$SELF_PATH")
+    SYM=$(readlink "$SELF_PATH")
+    SYM_DIRNAME=$(dirname -- "$SYM")
+    SELF_PATH=$(cd "$DIR" && cd "$SYM_DIRNAME" && pwd -P)/$(basename -- "$SYM")
+done
+
+# Build the path to our script dir.
+export DRUPAL_TI_SCRIPT_DIR=$(dirname "$SELF_PATH")
+
+# Use Drupal-7 by default.
+if [ -z "$DRUPAL_TI_ENVIRONMENT" ]
+then
+	export DRUPAL_TI_ENVIRONMENT="drupal-7"
+fi
+
+# Include the environment specific variables.
+export DRUPAL_TI_SCRIPT_DIRS="$DRUPAL_TI_SCRIPT_DIR_BEFORE $DRUPAL_TI_SCRIPT_DIR $DRUPAL_TI_SCRIPT_DIR_AFTER"
+
+# In case a '--' command was given, just include the given command with vars set.
+if [[ "$CMD" == '--'* ]]
+then
+	CMD=${CMD/--/}
+	shift
+	for SCRIPT_DIR in $DRUPAL_TI_SCRIPT_DIRS
+	do
+		SCRIPT="$SCRIPT_DIR/commands/$CMD.sh"
+		if [ -x "$SCRIPT" ]
+		then
+			# Loads the environment, then includes the script.
+			"$DRUPAL_TI_SCRIPT_DIR/utility/include-script.sh" "$SCRIPT" "$@"
+		fi
+	done
+	exit 0
+fi
+
+# From here on in, we handle failures ourselves.
+set +e
+
+RC=0
+for RUNNER in $DRUPAL_TI_RUNNERS
+do
+	for SCRIPT_DIR in $DRUPAL_TI_SCRIPT_DIRS
+	do
+		SCRIPT="$SCRIPT_DIR/runners/$RUNNER/$CMD.sh"
+		if [ -x "$SCRIPT" ]
+		then
+			# Loads the environment, then includes the script.
+			"$DRUPAL_TI_SCRIPT_DIR/utility/include-script.sh" "$SCRIPT"
+			if [ $? -ne 0  ]
+			then
+				echo "Error: $SCRIPT exited with a failure." 1>&2
+				RC=1
+			fi
+		fi
+	done
+done
+
+# Ensure we don't exit with error status code.
+exit $RC
