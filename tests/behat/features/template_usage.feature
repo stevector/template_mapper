@@ -31,10 +31,19 @@
 
       Given I am logged in as a user with the "administrator" role
       And I go to "admin/structure/template_mapping/add"
-      And I fill in "Label" with "node"
-      And I fill in "Machine-readable name" with "node"
-      And I fill in "Mappings" with "node__article__full|node__longform_prose/node__page__full|node__marketing_message"
+      And I fill in "Label" with "node__article__full"
+      And I fill in "Machine-readable name" with "node__article__full"
+      And I fill in "Mapping" with "node__longform_prose"
       And I press the "Save" button
+
+
+      Given I am logged in as a user with the "administrator" role
+      And I go to "admin/structure/template_mapping/add"
+      And I fill in "Label" with "node__page__full"
+      And I fill in "Machine-readable name" with "node__page__full"
+      And I fill in "Mapping" with "node__marketing_message"
+      And I press the "Save" button
+
       # verify article.
       And I visit "node/add/article"
       And I fill in "Title" with "Article Node 2"
