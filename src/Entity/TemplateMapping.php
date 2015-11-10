@@ -79,18 +79,4 @@ class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterfa
     $this->label = $this->id() . ':' . $this->getMapping();
     parent::preSave($storage);
   }
-
-  public function getMappingsArray() {
-
-    $return = array();
-    $mappings = explode("/", $this->mappings);
-    foreach ($mappings as $mapping) {
-      $exploded = explode("|", trim($mapping));
-      $return[trim($exploded[0])] = trim($exploded[1]);
-    }
-    return $return;
-  }
-
-
-
 }
