@@ -28,7 +28,7 @@ class TemplateMappingForm extends EntityForm {
 
     $form['id'] = array(
       '#type' => 'textfield',
-      '#title' => $this->t('Pre-existing theme hook suggestion.'),
+      '#title' => $this->t('Pre-existing theme hook suggestion'),
       '#default_value' => $template_mapping->id(),
       '#machine_name' => array(
         'exists' => '\Drupal\template_mapper\Entity\TemplateMapping::load',

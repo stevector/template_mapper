@@ -47,6 +47,7 @@ class TemplateMapper {
    */
   private function getAllMappings() {
     if (empty($this->allMappings)) {
+      // @todo, use caching.
       $template_mappings = $this->entityManager->getStorage('template_mapping')->loadMultiple(NULL);
       $all_mappings = array();
       foreach ($template_mappings as $template_mapping) {

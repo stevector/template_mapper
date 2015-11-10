@@ -19,7 +19,8 @@ class TemplateMappingListBuilder extends ConfigEntityListBuilder {
    */
   public function buildHeader() {
     $header['label'] = $this->t('Template mapping');
-    $header['id'] = $this->t('Machine name');
+    $header['id'] = $this->t('Pre-existing theme hook suggestion');
+    $header['mapping'] = $this->t('Replacement suggestion');
     return $header + parent::buildHeader();
   }
 
@@ -29,6 +30,7 @@ class TemplateMappingListBuilder extends ConfigEntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     $row['label'] = $this->getLabel($entity);
     $row['id'] = $entity->id();
+    $row['mapping'] = $entity->getMapping();
     // You probably want a few more properties here...
     return $row + parent::buildRow($entity);
   }

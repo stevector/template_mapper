@@ -36,7 +36,7 @@
       And I fill in "Replacement suggestion" with "node__longform_prose"
       And I press the "Save" button
       # @todo add check for the target suggestion.
-      Then I should see the text "node__article__full" in the "node__article__full" row
+      Then I should see the text "node__article__full" in the "node__longform_prose" row
 
 
 
@@ -46,7 +46,7 @@
       And I fill in "Replacement suggestion" with "node__marketing_message"
       And I press the "Save" button
             # @todo add check for the target suggestion.
-      Then I should see the text "node__page__full" in the "node__page__full" row
+      Then I should see the text "node__page__full" in the "node__marketing_message" row
 
       # verify article.
       And I visit "node/add/article"
@@ -61,20 +61,3 @@
       Then I should see the text "The file node--marketing-message.html.twig from template_mapper_test_theme"
       Then I should not see the text "The file node.html.twig from template_mapper_test_theme"
 
-
-
-    Scenario: Delete mapping configuration
-      # @todo make permissions specific to this module.
-      # @todo, there is no "Then" statement here. It is just cleanup.
-      Given I am logged in as a user with the "administrator" role
-      And I go to "admin/structure/template_mapping"
-      And I click "Delete" in the "node__article__full" row
-      And I press the "Delete" button
-      And I go to "admin/structure/template_mapping"
-      Then I should not see the text "node__article__full"
-
-      And I go to "admin/structure/template_mapping"
-      And I click "Delete" in the "node__page__full" row
-      And I press the "Delete" button
-      And I go to "admin/structure/template_mapping"
-      Then I should not see the text "node__page__full"
