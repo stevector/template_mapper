@@ -57,19 +57,17 @@ class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterfa
 
   protected $mapping;
 
-
-
   /**
    * {@inheritdoc}
    */
   public function getMapping() {
-    return $this->mappings;
+    return $this->mapping;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setMapping($mappings) {
+  public function setMapping($mapping) {
     $this->weight = $mapping;
   }
 
@@ -85,22 +83,5 @@ class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterfa
   }
 
 
-  public function performMapping($existing_suggestions) {
-
-    $replacements = $this->getMappingsArray();
-
-    $new_suggestions = array();
-    foreach ($existing_suggestions as $suggestion) {
-
-      if (array_key_exists($suggestion, $replacements)) {
-        $new_suggestions[] = $replacements[$suggestion];
-      }
-      else {
-        $new_suggestions[] = $suggestion;
-      }
-
-    }
-    return $new_suggestions;
-  }
 
 }

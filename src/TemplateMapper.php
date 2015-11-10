@@ -7,23 +7,76 @@
 
 namespace Drupal\template_mapper;
 
+
+use Drupal\Core\Entity\EntityManagerInterface;
+
 /**
  * Defines the Template mapper service.
  *
  * @todo, make an interface.
  */
 class TemplateMapper {
+  /*
+   * @var EntityManagerInterface
+   */
+  private $entityManager;
+
+
+  /*
+   * @var array of all mappings
+   */
+  private $allMappings;
+
+  /**
+   * Constructor.
+   *
+   * @param EntityManagerInterface $entity_manager
+   *   The entity manager.
+   */
+  public function __construct(EntityManagerInterface $entity_manager) {
+    $this->entityManager = $entity_manager;
+  }
+
+  public function setAllMappings($mappings) {
+    $this->allMappings = $mappings;
+  }
+
+  /**
+   * @todo, this function should not be necessary. Make a way to ask the entity
+   * manager just for mappings appropriate to the given hook.
+   */
+  private function getAllMappings() {
+    if (empty($this->allMappings)) {
+      $all_mappings = $this->entityManager->getStorage('template_mapping')->loadMultiple(NULL);
+      $this->setAllMappings($all_mappings);
+    }
+    return $this->allMappings;
+  }
+
+
+  public function getMappingsArray($hook) {
+
+  }
+
+
+
+
 
   public function performMapping($existing_suggestions, $hook) {
-    // @todo, this service should not be calling \Drupal. That defeats the
-    // purpose of a service.
-    $TemplateMapper =  \Drupal\template_mapper\Entity\TemplateMapping::load($hook);
-    // @todo Is there a better 'if' check to run?
-    if ($TemplateMapper) {
-      return $TemplateMapper->performMapping($existing_suggestions);
+
+    $replacements = $this->getAllMappings($hook);
+
+    $new_suggestions = array();
+    foreach ($existing_suggestions as $suggestion) {
+
+      if (array_key_exists($suggestion, $replacements)) {
+        $new_suggestions[] = $replacements[$suggestion];
+      }
+      else {
+        $new_suggestions[] = $suggestion;
+      }
+
     }
-    else {
-      return $existing_suggestions;
-    }
+    return $new_suggestions;
   }
 }
