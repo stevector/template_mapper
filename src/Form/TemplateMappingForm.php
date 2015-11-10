@@ -46,15 +46,6 @@ class TemplateMappingForm extends EntityForm {
       '#description' => $this->t('Enter the name of the new template suggestion to which you are mapping. For instance, if you want a template named node--illustrated-list-item.html.twig to be used, enter node__illustrated_list_item.'),
     );
 
-    $form['label'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Label'),
-      '#maxlength' => 255,
-      '#default_value' => $template_mapping->label(),
-      '#description' => $this->t("Enter the same value as is used in 'Pre-existing theme hook suggestion.' @todo, remove this field and set it automatically"),
-      '#required' => TRUE,
-    );
-
     return $form;
   }
 
