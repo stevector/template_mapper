@@ -9,6 +9,7 @@ namespace Drupal\template_mapper\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\template_mapper\TemplateMappingInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
 
 /**
  * Defines the Template mapping entity.
@@ -55,52 +56,27 @@ class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterfa
   protected $label;
 
 
-  protected $mappings;
-
-
+  protected $mapping;
 
   /**
    * {@inheritdoc}
    */
-  public function getMappings() {
-    return $this->mappings;
+  public function getMapping() {
+    return $this->mapping;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setMappings($mappings) {
-    $this->weight = $mappings;
+  public function setMapping($mapping) {
+    $this->mapping = $mapping;
   }
 
-  public function getMappingsArray() {
-
-    $return = array();
-    $mappings = explode("/", $this->mappings);
-    foreach ($mappings as $mapping) {
-      $exploded = explode("|", trim($mapping));
-      $return[trim($exploded[0])] = trim($exploded[1]);
-    }
-    return $return;
+  /**
+   * {@inheritdoc}
+   */
+  public function preSave(EntityStorageInterface $storage) {
+    $this->label = $this->id() . ':' . $this->getMapping();
+    parent::preSave($storage);
   }
-
-
-  public function performMapping($existing_suggestions) {
-
-    $replacements = $this->getMappingsArray();
-
-    $new_suggestions = array();
-    foreach ($existing_suggestions as $suggestion) {
-
-      if (array_key_exists($suggestion, $replacements)) {
-        $new_suggestions[] = $replacements[$suggestion];
-      }
-      else {
-        $new_suggestions[] = $suggestion;
-      }
-
-    }
-    return $new_suggestions;
-  }
-
 }

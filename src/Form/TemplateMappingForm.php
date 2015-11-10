@@ -21,35 +21,30 @@ class TemplateMappingForm extends EntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
+
     $form = parent::form($form, $form_state);
 
     $template_mapping = $this->entity;
-    $form['label'] = array(
-      '#type' => 'textfield',
-      '#title' => $this->t('Label'),
-      '#maxlength' => 255,
-      '#default_value' => $template_mapping->label(),
-      '#description' => $this->t("Label for the Template mapping."),
-      '#required' => TRUE,
-    );
 
     $form['id'] = array(
-      '#type' => 'machine_name',
+      '#type' => 'textfield',
+      '#title' => $this->t('Pre-existing theme hook suggestion'),
       '#default_value' => $template_mapping->id(),
       '#machine_name' => array(
         'exists' => '\Drupal\template_mapper\Entity\TemplateMapping::load',
       ),
-      '#disabled' => !$template_mapping->isNew(),
+      '#required' => TRUE,
+      '#description' => $this->t('This is the value that is suggested by Drupal core or another module. For instance, if you want to override the template for full view mode for article nodes you would enter node__article__full. See https://www.drupal.org/node/2358785 for more details on how to find existing theme hook suggestions.'),
     );
 
-
-    $form['mappings'] = array(
-      '#type' => 'textarea',
-      '#title' => $this->t('Mappings'),
-      '#default_value' => $template_mapping->getMappings(),
+    // @todo, autocompleting to known existing templates would be nice.
+    $form['mapping'] = array(
+      '#type' => 'textfield',
+      '#title' => $this->t('Replacement suggestion'),
+      '#default_value' => $template_mapping->getMapping(),
+      '#required' => TRUE,
+      '#description' => $this->t('Enter the name of the new template suggestion to which you are mapping. For instance, if you want a template named node--illustrated-list-item.html.twig to be used, enter node__illustrated_list_item.'),
     );
-
-    /* You will need additional form elements for your custom properties. */
 
     return $form;
   }

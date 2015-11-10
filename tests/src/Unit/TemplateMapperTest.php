@@ -10,13 +10,14 @@
 
 namespace Drupal\Tests\template_mapper;
 
-use Drupal\template_mapper\Entity\TemplateMapping;
+use Drupal\template_mapper\TemplateMapper;
+use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Tests\UnitTestCase;
 
 /**
  * Test the WorkflowState Class.
  *
- * @coversDefaultClass Drupal\template_mapper\Entity\TemplateMapping
+ * @coversDefaultClass Drupal\template_mapper\TemplateMapper
  * @group template_mapper
  */
 class TemplateMapperTest extends UnitTestCase {
@@ -24,11 +25,9 @@ class TemplateMapperTest extends UnitTestCase {
   /**
    * The autocomplete controller.
    *
-   * @var Drupal\template_mapper\Entity\TemplateMapping;
+   * @var Drupal\template_mapper\TemplateMapper;
    */
   protected $templateMapper;
-
-
 
 
   /**
@@ -36,34 +35,13 @@ class TemplateMapperTest extends UnitTestCase {
    */
   protected function setUp() {
 
-    // @todo, hard-coding this state might be a bad idea.
-    // Is a data provider better?
-    $templateMapper = [
-      'id' => 'node',
-      // @todo, switch from "/" to line breaks for separating mappings.
-      'mappings' => 'node__article|node__piece/node__teaser|node__illustrated_list_item',
-    ];
-    $this->templateMapper = new TemplateMapping($templateMapper, 'template_mapper');
-  }
-
-  /**
-   * Tests the label method.
-   */
-  public function testGetIdMethod() {
-    $this->assertEquals('node', $this->templateMapper->id());
-  }
-
-  /**
-   * Tests the getMappingArray Method.
-   */
-  public function testGetMappingArrayMethod() {
-
-    $expected_mappings_array = [
-      'node__article' => 'node__piece',
+    $this->templateMapper = new TemplateMapper($this->getMock('Drupal\Core\Entity\EntityManagerInterface'));
+    $this->templateMapper->setAllMappings([
+      'user__administrator' => 'user__admin',
+      'node__article'  => 'node__piece',
+      'views_view__homepage_articles' => 'views_view__illustrated_list',
       'node__teaser' => 'node__illustrated_list_item',
-    ];
-    $this->assertEquals($expected_mappings_array,
-      $this->templateMapper->getMappingsArray());
+    ]);
   }
 
   /**
@@ -81,8 +59,7 @@ class TemplateMapperTest extends UnitTestCase {
       'node__piece',
       'node__full',
     ];
-    $this->assertEquals($expect_new_suggestions,
-      $this->templateMapper->performMapping($existing_suggestions));
+    $this->assertEquals($expect_new_suggestions, $this->templateMapper->performMapping($existing_suggestions, 'node'));
 
   }
 }
