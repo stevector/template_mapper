@@ -30,13 +30,10 @@ class TemplateMapperTest extends UnitTestCase {
   protected $templateMapper;
 
 
-
-
   /**
    * {@inheritdoc}
    */
   protected function setUp() {
-
 
     $this->templateMapper = new TemplateMapper($this->getMock('Drupal\Core\Entity\EntityManagerInterface'));
     $this->templateMapper->setAllMappings([
@@ -45,26 +42,6 @@ class TemplateMapperTest extends UnitTestCase {
       'views_view__homepage_articles' => 'views_view__illustrated_list',
       'node__teaser' => 'node__illustrated_list_item',
     ]);
-  }
-
-  /**
-   * Tests the label method.
-   * /
-  public function testGetIdMethod() {
-    $this->assertEquals('node', $this->templateMapper->id());
-  }
-
-  /**
-   * Tests the getMappingArray Method.
-   * /
-  public function testGetMappingArrayMethod() {
-
-    $expected_mappings_array = [
-      'node__article' => 'node__piece',
-      'node__teaser' => 'node__illustrated_list_item',
-    ];
-    $this->assertEquals($expected_mappings_array,
-      $this->templateMapper->getMappingsArray());
   }
 
   /**

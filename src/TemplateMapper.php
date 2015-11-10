@@ -47,23 +47,20 @@ class TemplateMapper {
    */
   private function getAllMappings() {
     if (empty($this->allMappings)) {
-      $all_mappings = $this->entityManager->getStorage('template_mapping')->loadMultiple(NULL);
+      $template_mappings = $this->entityManager->getStorage('template_mapping')->loadMultiple(NULL);
+      $all_mappings = array();
+      foreach ($template_mappings as $template_mapping) {
+        $all_mappings[$template_mapping->id()] = $template_mapping->getMapping();
+      }
       $this->setAllMappings($all_mappings);
     }
     return $this->allMappings;
   }
 
-
-  public function getMappingsArray($hook) {
-
-  }
-
-
-
-
-
   public function performMapping($existing_suggestions, $hook) {
 
+    // @todo, getAllMappings is not filtering down by hook at all anymore.
+    // Restore that.
     $replacements = $this->getAllMappings($hook);
 
     $new_suggestions = array();
