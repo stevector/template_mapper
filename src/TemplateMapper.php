@@ -13,7 +13,7 @@ use Drupal\Core\Entity\EntityManagerInterface;
 /**
  * Defines the Template mapper service.
  *
- * @todo, make an interface.
+ * @todo, fill out interface.
  */
 class TemplateMapper {
   /*

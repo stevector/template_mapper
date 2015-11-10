@@ -37,8 +37,9 @@
       And I press the "Save" button
       # @todo add check for the target suggestion.
       Then I should see the text "node__article__full" in the "node__longform_prose" row
-
-
+      # @todo, this assertion covers the presave in TemplateMapping. That method
+      # should be tested with a unit test.
+      Then I should see the text "node__article__full:node__longform_prose" in the "node__longform_prose" row
 
       And I go to "admin/structure/template_mapping/add"
       And I fill in "Pre-existing theme hook" with "node__page__full"
@@ -47,6 +48,9 @@
       And I press the "Save" button
             # @todo add check for the target suggestion.
       Then I should see the text "node__page__full" in the "node__marketing_message" row
+      # @todo, this assertion covers the presave in TemplateMapping. That method
+      # should be tested with a unit test.
+      Then I should see the text "node__page__full:node__marketing_message" in the "node__marketing_message" row
 
       # verify article.
       And I visit "node/add/article"

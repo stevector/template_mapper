@@ -15,4 +15,5 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 interface TemplateMappingInterface extends ConfigEntityInterface {
   // Add get/set methods for your configuration properties here.
 
+  // @todo, fill out interface.
 }
