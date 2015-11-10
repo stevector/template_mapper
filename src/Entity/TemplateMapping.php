@@ -69,7 +69,7 @@ class TemplateMapping extends ConfigEntityBase implements TemplateMappingInterfa
    * {@inheritdoc}
    */
   public function setMapping($mapping) {
-    $this->weight = $mapping;
+    $this->mapping = $mapping;
   }
 
   /**
