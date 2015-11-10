@@ -30,7 +30,9 @@
       #  | administer site configuration |
 
       Given I am logged in as a user with the "administrator" role
-      And I go to "admin/structure/template_mapping/add"
+      And I go to "admin/structure/template_mapping"
+      And I should see the text "No template mappings have been added yet."
+      And I follow "Add a new template mapping"
       And I fill in "Pre-existing theme hook" with "node__article__full"
       And I fill in "Replacement suggestion" with "node__longform_prose"
       And I press the "Save" button

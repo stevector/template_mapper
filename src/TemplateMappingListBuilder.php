@@ -35,4 +35,19 @@ class TemplateMappingListBuilder extends ConfigEntityListBuilder {
     return $row + parent::buildRow($entity);
   }
 
+
+  /**
+   * {@inheritdoc}
+   *
+   * Builds the entity listing as renderable array for table.html.twig.
+   *
+   * @todo Add a link to add a new item to the #empty text.
+   */
+  public function render() {
+    $build = parent::render();
+    $build['table']['#empty'] = $this->t('No template mappings have been added yet.');
+
+    return $build;
+  }
+
 }
